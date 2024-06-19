@@ -1,0 +1,30 @@
+{
+  "LABEL": {
+    "name": "",
+    "color": "EEEEEE"
+  },
+  "CHECKS": {
+    "prefixes": [
+      "fix: ",
+      "feat: ",
+      "docs: ",
+      "style: ",
+      "refactor: ",
+      "test: ",
+      "chore: ",
+      "ci: ",
+      "perf: ",
+      "improvement: ",
+      "breaking: ",
+      "revert"
+  ],
+    "regexp": "docs\\(v[0-9]\\): ",
+    "regexpFlags": "i",
+    "ignoreLabels" : ["pr-title-ignore"]
+  },
+  "MESSAGES": {
+    "success": "Successful",
+    "failure": "PR Title does not meet Git Commit Message Guidelines. Please read repository readme for more details.",
+    "notice": ""
+  }
+}
