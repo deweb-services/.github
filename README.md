@@ -32,3 +32,15 @@ First commit should be started with the prefix from the list above, the ID of a 
 All other next commits should be started with the prefix from the above list as well, JIRA ticket ID and a brief description of what was done should follow afterwards like in examples below:
 
 - **`feat: DWS-0000 updated may awesome feature`**
+
+## <b>Branches Naming Guideline</b>
+
+- **`dws-0000-<staging/production>`**
+- **`dws-0000-<small task description>`**
+
+###### Examples:
+
+- **`dws-0000-staging`**
+- **`dws-0000-main`**
+- **`dws-0000-libs-uptick`**
+- **`dws-0000-code-refactoring`**
