@@ -1,0 +1,42 @@
+name: Connect task with release
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+
+jobs:
+  jira-automation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Fetch Secrets
+        uses: bitwarden/sm-action@v2
+        with:
+          access_token: ${{ secrets.BW_PIPELINE_ACCESS_TOKEN }}
+          # ------ need to fill <bw_id> values
+          secrets: |
+            <bw_id> > JIRA_USERNAME
+            <bw_id> > JIRA_PASSWORD
+
+      - uses: actions-ecosystem/action-regex-match@v2
+        id: regex-match
+        with:
+          text: ${{ github.event.head_commit.message }}
+          regex: "(dws|DWS)-\\d+"
+
+      - id: string
+        uses: ASzc/change-string-case-action@v6
+        with:
+          string: ${{ steps.regex-match.outputs.match }}
+
+      - uses: levigo/github-action-jira-fixversion@v1.0
+        with:
+          domain: "dws-corp.atlassian.net"
+          username: ${{ env.JIRA_USERNAME }}
+          password: ${{ env.JIRA_PASSWORD }}
+          # ------ can be modified
+          versionName: "${{ github.event.repository.name }}_${{ github.ref_name }}"
+          issueKeys: ${{ steps.string.outputs.uppercase }}
+
