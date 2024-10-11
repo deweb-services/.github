@@ -37,6 +37,6 @@ jobs:
           username: ${{ env.JIRA_USERNAME }}
           password: ${{ env.JIRA_PASSWORD }}
           # ------ can be modified
-          versionName: "${{ github.event.repository.name }}_${{ github.ref_name }}"
+          versionName: "${{ github.ref_name }}_${{ github.event.repository.name }}"
           issueKeys: ${{ steps.string.outputs.uppercase }}
 
