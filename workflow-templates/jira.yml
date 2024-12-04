@@ -24,7 +24,7 @@ jobs:
         id: regex-match
         with:
           text: ${{ github.event.head_commit.message }}
-          regex: "(dws|DWS)-\\d+"
+          regex: "(dws|DWS)-[1-9]\\d*"
 
       - id: string
         uses: ASzc/change-string-case-action@v6
@@ -32,6 +32,7 @@ jobs:
           string: ${{ steps.regex-match.outputs.match }}
 
       - uses: levigo/github-action-jira-fixversion@v1.0
+        if: ${{ steps.string.outputs.uppercase != '' }}
         with:
           domain: "dws-corp.atlassian.net"
           username: ${{ env.JIRA_USERNAME }}
